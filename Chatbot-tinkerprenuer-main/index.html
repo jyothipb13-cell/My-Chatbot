@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My AI Chatbot</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f4f4f4; }
+    #chatbox { width: 400px; margin: 50px auto; background: white; padding: 20px; border-radius: 10px; }
+    #messages { height: 300px; overflow-y: auto; border: 1px solid #ccc; padding: 10px; }
+    input { width: 80%; padding: 10px; }
+    button { padding: 10px; }
+  </style>
+</head>
+<body>
+  <div id="chatbox">
+    <h2>My AI Chatbot</h2>
+    <div id="messages"></div>
+    <input type="text" id="userInput" placeholder="Type your message...">
+    <button onclick="sendMessage()">Send</button>
+  </div>
+
+  <script>
+    async function sendMessage() {
+      const input = document.getElementById("userInput").value;
+      const messages = document.getElementById("messages");
+      messages.innerHTML += `<p><b>You:</b> ${input}</p>`;
+
+      // Replace with your API call
+      const response = await fetch("YOUR_BACKEND_ENDPOINT", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: input })
+      });
+
+      const data = await response.json();
+      messages.innerHTML += `<p><b>Bot:</b> ${data.reply}</p>`;
+    }
+  </script>
+</body>
+</html>
